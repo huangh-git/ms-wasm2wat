@@ -527,6 +527,7 @@ bool BinaryReader::IsConcreteType(Type type) {
     case Type::I64:
     case Type::F32:
     case Type::F64:
+    case Type::MemRef:
       return true;
 
     case Type::V128:
@@ -947,6 +948,22 @@ Result BinaryReader::ReadInstructions(bool stop_on_end,
         break;
       }
 
+      case Opcode::I32MSLoad8S:
+      case Opcode::I32MSLoad8U:
+      case Opcode::I32MSLoad16S:
+      case Opcode::I32MSLoad16U:
+      case Opcode::I64MSLoad8S:
+      case Opcode::I64MSLoad8U:
+      case Opcode::I64MSLoad16S:
+      case Opcode::I64MSLoad16U:
+      case Opcode::I64MSLoad32S:
+      case Opcode::I64MSLoad32U:
+      case Opcode::I32MSLoad:
+      case Opcode::I64MSLoad:
+      case Opcode::F32MSLoad:
+      case Opcode::F64MSLoad:
+      case Opcode::MemrefMSLoad:
+        
       case Opcode::I32Load8S:
       case Opcode::I32Load8U:
       case Opcode::I32Load16S:
@@ -979,6 +996,17 @@ Result BinaryReader::ReadInstructions(bool stop_on_end,
         break;
       }
 
+      case Opcode::I32MSStore8:
+      case Opcode::I32MSStore16:
+      case Opcode::I64MSStore8:
+      case Opcode::I64MSStore16:
+      case Opcode::I64MSStore32:
+      case Opcode::I32MSStore:
+      case Opcode::I64MSStore:
+      case Opcode::F32MSStore:
+      case Opcode::F64MSStore:
+      case Opcode::MemrefMSStore:
+        
       case Opcode::I32Store8:
       case Opcode::I32Store16:
       case Opcode::I64Store8:
@@ -1027,6 +1055,9 @@ Result BinaryReader::ReadInstructions(bool stop_on_end,
         CALLBACK(OnOpcodeUint32, memidx);
         break;
       }
+
+      case Opcode::MemrefAdd:
+      case Opcode::MemrefAnd:
 
       case Opcode::I32Add:
       case Opcode::I32Sub:
@@ -1820,6 +1851,32 @@ Result BinaryReader::ReadInstructions(bool stop_on_end,
       case Opcode::CallRef:
         CALLBACK(OnCallRefExpr);
         CALLBACK(OnOpcodeBare);
+        break;
+
+      case Opcode::MemrefConst:
+        uint32_t base;
+        CHECK_RESULT(ReadU32Leb128(&base, "memref.base_const value"));
+        uint32_t size;
+        CHECK_RESULT(ReadU32Leb128(&size, "memref.size_const value"));
+        uint32_t attr;
+        CHECK_RESULT(ReadU32Leb128(&attr, "memref.attr_const value"));
+        CALLBACK(OnMemrefConstExpr, base, size, attr);
+        break;
+
+      case Opcode::MemrefAlloc:
+        CALLBACK(OnMemrefAllocExpr, opcode);
+        CALLBACK0(OnOpcodeBare);
+        break;
+
+      case Opcode::MemrefNarrow:
+        CALLBACK(OnMemrefNarrowExpr, opcode);
+        CALLBACK0(OnOpcodeBare);
+        break;
+
+      case Opcode::MemrefField:
+        Index field;
+        CHECK_RESULT(ReadIndex(&field, "memref field index"));
+        CALLBACK(OnMemrefFieldExpr, opcode, field);
         break;
 
       default:

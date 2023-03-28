@@ -225,14 +225,53 @@ WABT_OPCODE(I64,  I64,  ___,  ___,  0,  0,    0xC2, I64Extend8S, "i64.extend8_s"
 WABT_OPCODE(I64,  I64,  ___,  ___,  0,  0,    0xC3, I64Extend16S, "i64.extend16_s", "")
 WABT_OPCODE(I64,  I64,  ___,  ___,  0,  0,    0xC4, I64Extend32S, "i64.extend32_s", "")
 
+/* MemRef */
+WABT_OPCODE(MemRef,  I32,     I32,  I32,  0,  0,    0xda, MemrefConst, "memref.const", "")
+WABT_OPCODE(MemRef,  MemRef,  I32,  ___,  0,  0,    0xdb, MemrefAdd, "memref.add", "")
+WABT_OPCODE(MemRef,  MemRef,  I32,  ___,  0,  0,    0xdc, MemrefAnd, "memref.and", "")
+WABT_OPCODE(MemRef,  I32,     I32,  I32,  0,  0,    0xdd, MemrefAlloc, "memref.alloc", "")
+WABT_OPCODE(MemRef,  MemRef,  I32,  I32,  0,  0,    0xde, MemrefNarrow, "memref.narrow", "")
+WABT_OPCODE(I32,     MemRef,  ___,  ___,  0,  0,    0xdf, MemrefField, "memref.field", "")
+
+WABT_OPCODE(I32,     MemRef,  ___,  ___,  4,  0,    0xe0, I32MSLoad, "i32.msload", "")
+WABT_OPCODE(I64,     MemRef,  ___,  ___,  8,  0,    0xe1, I64MSLoad, "i64.msload", "")
+WABT_OPCODE(F32,     MemRef,  ___,  ___,  4,  0,    0xe2, F32MSLoad, "f32.msload", "")
+WABT_OPCODE(F64,     MemRef,  ___,  ___,  8,  0,    0xe3, F64MSLoad, "f64.msload", "")
+WABT_OPCODE(MemRef,  MemRef,  ___,  ___,  4,  0,    0xe4, MemrefMSLoad, "memref.msload", "")
+
+WABT_OPCODE(I32,  MemRef,  ___,  ___,  1,  0,    0xe5, I32MSLoad8S, "i32.msload8_s", "")
+WABT_OPCODE(I32,  MemRef,  ___,  ___,  1,  0,    0xe6, I32MSLoad8U, "i32.msload8_u", "")
+WABT_OPCODE(I32,  MemRef,  ___,  ___,  2,  0,    0xe7, I32MSLoad16S, "i32.msload16_s", "")
+WABT_OPCODE(I32,  MemRef,  ___,  ___,  2,  0,    0xe8, I32MSLoad16U, "i32.msload16_u", "")
+WABT_OPCODE(I64,  MemRef,  ___,  ___,  1,  0,    0xe9, I64MSLoad8S, "i64.msload8_s", "")
+WABT_OPCODE(I64,  MemRef,  ___,  ___,  1,  0,    0xea, I64MSLoad8U, "i64.msload8_u", "")
+WABT_OPCODE(I64,  MemRef,  ___,  ___,  2,  0,    0xeb, I64MSLoad16S, "i64.msload16_s", "")
+WABT_OPCODE(I64,  MemRef,  ___,  ___,  2,  0,    0xec, I64MSLoad16U, "i64.msload16_u", "")
+WABT_OPCODE(I64,  MemRef,  ___,  ___,  4,  0,    0xed, I64MSLoad32S, "i64.msload32_s", "")
+WABT_OPCODE(I64,  MemRef,  ___,  ___,  4,  0,    0xee, I64MSLoad32U, "i64.msload32_u", "")
+
+WABT_OPCODE(___,  MemRef,  I32,     ___,  4,  0,    0xf0, I32MSStore, "i32.msstore", "")
+WABT_OPCODE(___,  MemRef,  I64,     ___,  8,  0,    0xf1, I64MSStore, "i64.msstore", "")
+WABT_OPCODE(___,  MemRef,  F32,     ___,  4,  0,    0xf2, F32MSStore, "f32.msstore", "")
+WABT_OPCODE(___,  MemRef,  F64,     ___,  8,  0,    0xf3, F64MSStore, "f64.msstore", "")
+WABT_OPCODE(___,  MemRef,  MemRef,  ___,  4,  0,    0xf4, MemrefMSStore, "memref.msstore", "")
+
+WABT_OPCODE(___,  MemRef,  I32,  ___,  1,  0,    0xf5, I32MSStore8, "i32.msstore8", "")
+WABT_OPCODE(___,  MemRef,  I32,  ___,  2,  0,    0xf6, I32MSStore16, "i32.msstore16", "")
+WABT_OPCODE(___,  MemRef,  I64,  ___,  1,  0,    0xf7, I64MSStore8, "i64.msstore8", "")
+WABT_OPCODE(___,  MemRef,  I64,  ___,  2,  0,    0xf8, I64MSStore16, "i64.msstore16", "")
+WABT_OPCODE(___,  MemRef,  I64,  ___,  4,  0,    0xf9, I64MSStore32, "i64.msstore32", "")
+
 /* Interpreter-only opcodes */
-WABT_OPCODE(___,  ___,  ___,  ___,  0,  0,    0xe0, InterpAlloca, "alloca", "")
-WABT_OPCODE(___,  I32,  ___,  ___,  0,  0,    0xe1, InterpBrUnless, "br_unless", "")
-WABT_OPCODE(___,  ___,  ___,  ___,  0,  0,    0xe2, InterpCallImport, "call_import", "")
-WABT_OPCODE(___,  ___,  ___,  ___,  0,  0,    0xe3, InterpData, "data", "")
-WABT_OPCODE(___,  ___,  ___,  ___,  0,  0,    0xe4, InterpDropKeep, "drop_keep", "")
-WABT_OPCODE(___,  ___,  ___,  ___,  0,  0,    0xe5, InterpCatchDrop, "catch_drop", "")
-WABT_OPCODE(___,  ___,  ___,  ___,  0,  0,    0xe6, InterpAdjustFrameForReturnCall, "adjust_frame_for_return_call", "")
+// for memref，we should change the binary format for opcode
+WABT_OPCODE(___,  ___,  ___,  ___,  0,  0xf0,    0xe0, InterpAlloca, "alloca", "")
+WABT_OPCODE(___,  I32,  ___,  ___,  0,  0xf0,    0xe1, InterpBrUnless, "br_unless", "")
+WABT_OPCODE(___,  ___,  ___,  ___,  0,  0xf0,    0xe2, InterpCallImport, "call_import", "")
+WABT_OPCODE(___,  ___,  ___,  ___,  0,  0xf0,    0xe3, InterpData, "data", "")
+WABT_OPCODE(___,  ___,  ___,  ___,  0,  0xf0,    0xe4, InterpDropKeep, "drop_keep", "")
+WABT_OPCODE(___,  ___,  ___,  ___,  0,  0xf0,    0xe5, InterpCatchDrop, "catch_drop", "")
+WABT_OPCODE(___,  ___,  ___,  ___,  0,  0xf0,    0xe6, InterpAdjustFrameForReturnCall, "adjust_frame_for_return_call", "")
+/**/
 
 /* Saturating float-to-int opcodes (--enable-saturating-float-to-int) */
 WABT_OPCODE(I32,  F32,  ___,  ___,  0,  0xfc, 0x00, I32TruncSatF32S, "i32.trunc_sat_f32_s", "")

@@ -40,6 +40,7 @@ inline const char* GetDecompTypeName(Type t) {
     case Type::Func: return "func";
     case Type::FuncRef: return "funcref";
     case Type::ExternRef: return "externref";
+    case Type::MemRef: return "memref";
     case Type::Void: return "void";
     default: return "ILLEGAL";
   }

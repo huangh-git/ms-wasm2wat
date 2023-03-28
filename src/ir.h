@@ -340,6 +340,10 @@ enum class ExprType {
   MemoryGrow,
   MemoryInit,
   MemorySize,
+  MemrefAlloc,
+  MemrefConst,
+  MemrefField,
+  MemrefNarrow,
   Nop,
   RefIsNull,
   RefFunc,
@@ -486,6 +490,25 @@ class OpcodeExpr : public ExprMixin<TypeEnum> {
       : ExprMixin<TypeEnum>(loc), opcode(opcode) {}
 
   Opcode opcode;
+};
+
+class MemrefConstExpr : public ExprMixin<ExprType::MemrefConst> {
+ public:
+  MemrefConstExpr(uint32_t base, uint32_t size, uint32_t attr, const Location& loc = Location())
+    : ExprMixin<ExprType::MemrefConst>(loc), base(base), size(size), attr(attr) {}
+  uint32_t base;
+  uint32_t size;
+  uint32_t attr;
+};
+typedef OpcodeExpr<ExprType::MemrefAlloc> MemrefAllocExpr;
+typedef OpcodeExpr<ExprType::MemrefNarrow> MemrefNarrowExpr;
+
+class MemrefFieldExpr : public OpcodeExpr<ExprType::MemrefField> {
+ public:
+  MemrefFieldExpr(Opcode opcode, Index fieldIdx, const Location& loc = Location())
+      : OpcodeExpr<ExprType::MemrefField>(opcode, loc), fieldIdx(fieldIdx) {}
+
+  Index fieldIdx;
 };
 
 typedef OpcodeExpr<ExprType::Binary> BinaryExpr;

@@ -219,6 +219,14 @@ void BinaryWriterSpec::WriteConst(const Const& const_) {
       json_stream_->Writef("\"%u\"", const_.u32());
       break;
 
+    // case Type::MemRef:
+    //   WriteString("memref");
+    //   WriteSeparator();
+    //   WriteKey("value");
+    //   // TODO: need modify Writef for Memref
+    //   json_stream_->Writef("\"%u\"", const_.u32());
+    //   break;
+
     case Type::I64:
       WriteString("i64");
       WriteSeparator();

@@ -2102,6 +2102,14 @@ void CWriter::Write(const ExprList& exprs) {
       case ExprType::CallRef:
         UNIMPLEMENTED("...");
         break;
+      case ExprType::MemrefAlloc:
+        break;
+      case ExprType::MemrefConst:
+        break;
+      case ExprType::MemrefField:
+        break;
+      case ExprType::MemrefNarrow:
+        break;
     }
   }
 }

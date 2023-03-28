@@ -484,6 +484,12 @@ class BinaryReaderDelegate {
                                 Address size) = 0;
   virtual Result EndCodeMetadataSection() = 0;
 
+  /* Memref */
+  virtual Result OnMemrefConstExpr(uint32_t base_bits, uint32_t size_bits, uint32_t attr_bits) = 0;
+  virtual Result OnMemrefAllocExpr(Opcode opcode) = 0;
+  virtual Result OnMemrefNarrowExpr(Opcode opcode) = 0;
+  virtual Result OnMemrefFieldExpr(Opcode opcode, Index index) = 0;
+
   const State* state = nullptr;
 };
 

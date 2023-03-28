@@ -1185,4 +1185,16 @@ Result SharedValidator::OnUnreachable(const Location& loc) {
   return result;
 }
 
+Result SharedValidator::OnMemrefCheck(const Location& loc, Opcode opcode) {
+  Result result = CheckInstr(opcode, loc);
+  result |= typechecker_.OnMemrefCheckOpcode3(opcode);
+  return result;
+}
+
+Result SharedValidator::OnMemrefField(const Location& loc, Index idx) {
+  Result result = CheckInstr(Opcode::MemrefField, loc);
+  result |= typechecker_.OnMemrefField(idx);
+  return result;
+}
+
 }  // namespace wabt

@@ -136,6 +136,9 @@ class TypeChecker {
 
   static Result CheckType(Type actual, Type expected);
 
+  Result OnMemrefCheckOpcode3(Opcode opcode);
+  Result OnMemrefField(Index index);
+
  private:
   void WABT_PRINTF_FORMAT(2, 3) PrintError(const char* fmt, ...);
   Result TopLabel(Label** out_label);

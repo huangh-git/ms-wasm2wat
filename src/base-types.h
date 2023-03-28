@@ -26,6 +26,13 @@ typedef uint32_t Index;    // An index into one of the many index spaces.
 typedef uint64_t Address;  // An address or size in linear memory.
 typedef size_t Offset;     // An offset into a host's file or memory buffer.
 
+//typedef struct MemrefAddr {
+//  uint32_t addr;
+//  uint32_t base;
+//  uint32_t size;
+//  uint32_t attr;
+//}MemrefAddr;
+
 static const Address kInvalidAddress = ~0;
 static const Index kInvalidIndex = ~0;
 static const Offset kInvalidOffset = ~0;

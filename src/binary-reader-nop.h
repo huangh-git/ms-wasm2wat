@@ -582,6 +582,11 @@ class BinaryReaderNop : public BinaryReaderDelegate {
     return Result::Ok;
   }
   Result EndLinkingSection() override { return Result::Ok; }
+
+  Result OnMemrefConstExpr(uint32_t base_bits, uint32_t size_bits, uint32_t attr_bits) override { return Result::Ok; }
+  Result OnMemrefAllocExpr(Opcode opcode) override { return Result::Ok; }
+  Result OnMemrefNarrowExpr(Opcode opcode) override { return Result::Ok; }
+  Result OnMemrefFieldExpr(Opcode opcode, Index index) override { return Result::Ok; }
 };
 
 }  // namespace wabt

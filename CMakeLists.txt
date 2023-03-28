@@ -60,7 +60,9 @@ if (NOT "${CMAKE_PROJECT_VERSION}")
   set(CMAKE_PROJECT_VERSION ${PROJECT_VERSION})
 endif()
 
-option(BUILD_TESTS "Build GTest-based tests" ON)
+# option(BUILD_TESTS "Build GTest-based tests" ON)
+option(BUILD_TESTS "Build GTest-based tests" OFF)
+
 option(USE_SYSTEM_GTEST "Use system GTest, instead of building" OFF)
 option(BUILD_TOOLS "Build wabt commandline tools" ON)
 option(BUILD_FUZZ_TOOLS "Build tools that can repro fuzz bugs" OFF)

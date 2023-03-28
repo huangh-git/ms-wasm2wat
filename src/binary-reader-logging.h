@@ -405,6 +405,11 @@ class BinaryReaderLogging : public BinaryReaderDelegate {
   Result OnCodeMetadata(Offset offset, const void* data, Address size) override;
   Result EndCodeMetadataSection() override;
 
+  Result OnMemrefConstExpr(uint32_t base_bits, uint32_t size_bits, uint32_t attr_bits) override { return Result::Ok; }
+  Result OnMemrefAllocExpr(Opcode opcode) override { return Result::Ok; }
+  Result OnMemrefNarrowExpr(Opcode opcode) override { return Result::Ok; }
+  Result OnMemrefFieldExpr(Opcode opcode, Index index) override { return Result::Ok; }
+
  private:
   void Indent();
   void Dedent();

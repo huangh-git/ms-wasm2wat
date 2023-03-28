@@ -984,4 +984,16 @@ Result TypeChecker::EndInitExpr() {
   return result;
 }
 
+Result TypeChecker::OnMemrefCheckOpcode3(Opcode opcode) {
+  return CheckOpcode3(opcode);
+}
+
+Result TypeChecker::OnMemrefField(Index index) {
+  if(index >= 4)return Result::Error;
+  Result result = Result::Ok;
+  result |= PopAndCheck1Type(Type::MemRef, "memref.field");
+  PushType(Type::I32);
+  return result;
+}
+
 }  // namespace wabt

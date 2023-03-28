@@ -180,6 +180,9 @@ class SharedValidator {
   Result OnUnary(const Location&, Opcode);
   Result OnUnreachable(const Location&);
 
+  Result OnMemrefCheck(const Location&, Opcode);
+  Result OnMemrefField(const Location&, Index);
+
  private:
   struct FuncType {
     FuncType() = default;

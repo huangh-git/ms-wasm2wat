@@ -156,6 +156,11 @@ class Validator : public ExprVisitor::Delegate {
   Result OnLoadSplatExpr(LoadSplatExpr*) override;
   Result OnLoadZeroExpr(LoadZeroExpr*) override;
 
+  Result OnMemrefConstExpr(MemrefConstExpr*) override;
+  Result OnMemrefAllocExpr(MemrefAllocExpr*) override;
+  Result OnMemrefNarrowExpr(MemrefNarrowExpr*) override;
+  Result OnMemrefFieldExpr(MemrefFieldExpr*) override;
+
  private:
   Type GetDeclarationType(const FuncDeclaration&);
   Var GetFuncTypeIndex(const Location&, const FuncDeclaration&);
@@ -616,6 +621,23 @@ Result Validator::OnLoadSplatExpr(LoadSplatExpr* expr) {
 Result Validator::OnLoadZeroExpr(LoadZeroExpr* expr) {
   result_ |= validator_.OnLoadZero(expr->loc, expr->opcode, expr->memidx,
                                    expr->opcode.GetAlignment(expr->align));
+  return Result::Ok;
+}
+
+Result Validator::OnMemrefConstExpr(MemrefConstExpr* expr) {
+  result_ |= validator_.OnConst(expr->loc, Type::MemRef);
+  return Result::Ok;
+}
+Result Validator::OnMemrefAllocExpr(MemrefAllocExpr* expr) {
+  result_ |= validator_.OnMemrefCheck(expr->loc, expr->opcode);
+  return Result::Ok;
+}
+Result Validator::OnMemrefNarrowExpr(MemrefNarrowExpr* expr) {
+  result_ |= validator_.OnMemrefCheck(expr->loc, expr->opcode);
+  return Result::Ok;
+}
+Result Validator::OnMemrefFieldExpr(MemrefFieldExpr* expr) {
+  result_ |= validator_.OnMemrefField(expr->loc, expr->fieldIdx);
   return Result::Ok;
 }
 

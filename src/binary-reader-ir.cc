@@ -347,6 +347,11 @@ class BinaryReaderIR : public BinaryReaderNop {
                        std::string_view name,
                        Index table_index) override;
 
+  Result OnMemrefConstExpr(uint32_t base_bits, uint32_t size_bits, uint32_t attr_bits) override;
+  Result OnMemrefAllocExpr(Opcode opcode) override;
+  Result OnMemrefNarrowExpr(Opcode opcode) override;
+  Result OnMemrefFieldExpr(Opcode opcode, Index index) override;
+
  private:
   Location GetLocation() const;
   void PrintError(const char* format, ...);
@@ -1671,6 +1676,23 @@ Result BinaryReaderIR::OnTableSymbol(Index index,
                                      std::string_view name,
                                      Index table_index) {
   return SetTableName(index, name);
+}
+
+Result BinaryReaderIR::OnMemrefConstExpr(uint32_t base_bits, uint32_t size_bits, uint32_t attr_bits) {
+  return AppendExpr(MakeUnique<MemrefConstExpr>(base_bits, size_bits, attr_bits));
+}
+
+Result BinaryReaderIR::OnMemrefAllocExpr(wabt::Opcode opcode) {
+  return AppendExpr(MakeUnique<MemrefAllocExpr>(opcode));
+}
+
+Result BinaryReaderIR::OnMemrefNarrowExpr(wabt::Opcode opcode) {
+  return AppendExpr(MakeUnique<MemrefNarrowExpr>(opcode));
+}
+
+Result BinaryReaderIR::OnMemrefFieldExpr(wabt::Opcode opcode, wabt::Index index) {
+  if(index >= 4)return Result::Error;
+  return AppendExpr(MakeUnique<MemrefFieldExpr>(opcode, index));
 }
 
 }  // end anonymous namespace

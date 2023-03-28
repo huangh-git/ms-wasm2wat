@@ -150,6 +150,7 @@ ModuleContext::Arities ModuleContext::GetExprArity(const Expr& expr) const {
               true};
     }
 
+    case ExprType::MemrefConst:
     case ExprType::Const:
     case ExprType::GlobalGet:
     case ExprType::LocalGet:
@@ -175,6 +176,8 @@ ModuleContext::Arities ModuleContext::GetExprArity(const Expr& expr) const {
     case ExprType::TableCopy:
     case ExprType::TableFill:
       return {3, 0};
+
+    case ExprType::MemrefField:
 
     case ExprType::AtomicLoad:
     case ExprType::Convert:
@@ -208,6 +211,9 @@ ModuleContext::Arities ModuleContext::GetExprArity(const Expr& expr) const {
 
     case ExprType::Rethrow:
       return {0, 0, true};
+
+    case ExprType::MemrefAlloc:
+    case ExprType::MemrefNarrow:
 
     case ExprType::AtomicRmwCmpxchg:
     case ExprType::AtomicWait:

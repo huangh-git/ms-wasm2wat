@@ -619,6 +619,11 @@ class WatWriter::ExprVisitorDelegate : public ExprVisitor::Delegate {
   Result OnLoadSplatExpr(LoadSplatExpr*) override;
   Result OnLoadZeroExpr(LoadZeroExpr*) override;
 
+  Result OnMemrefConstExpr(MemrefConstExpr*) override;
+  Result OnMemrefAllocExpr(MemrefAllocExpr*) override;
+  Result OnMemrefNarrowExpr(MemrefNarrowExpr*) override;
+  Result OnMemrefFieldExpr(MemrefFieldExpr*) override;
+
  private:
   WatWriter* writer_;
 };
@@ -1090,6 +1095,31 @@ Result WatWriter::ExprVisitorDelegate::OnLoadSplatExpr(LoadSplatExpr* expr) {
 
 Result WatWriter::ExprVisitorDelegate::OnLoadZeroExpr(LoadZeroExpr* expr) {
   writer_->WriteLoadStoreExpr<LoadZeroExpr>(expr);
+  return Result::Ok;
+}
+
+Result WatWriter::ExprVisitorDelegate::OnMemrefConstExpr(MemrefConstExpr* expr) {
+  writer_->WritePutsSpace(Opcode::MemrefConst_Opcode.GetName());
+  writer_->Writef("base=%d", static_cast<int32_t>(expr->base));;
+  writer_->Writef("size=%d", static_cast<int32_t>(expr->size));;
+  writer_->Writef("attr=%d", static_cast<int32_t>(expr->attr));
+  writer_->WriteNewline(NO_FORCE_NEWLINE);
+  return Result::Ok;
+}
+
+Result WatWriter::ExprVisitorDelegate::OnMemrefAllocExpr(MemrefAllocExpr* expr) {
+  writer_->WritePutsNewline(expr->opcode.GetName());
+  return Result::Ok;
+}
+Result WatWriter::ExprVisitorDelegate::OnMemrefNarrowExpr(MemrefNarrowExpr* expr) {
+  writer_->WritePutsNewline(expr->opcode.GetName());
+  return Result::Ok;
+}
+Result WatWriter::ExprVisitorDelegate::OnMemrefFieldExpr(MemrefFieldExpr* expr) {
+  writer_->WritePutsSpace(expr->opcode.GetName());
+  writer_->Writef("%d", static_cast<int32_t>(expr->fieldIdx));
+  writer_->WriteNewline(NO_FORCE_NEWLINE);
+//  writer_->WriteNameOrIndex("", expr->fieldIdx, NextChar::Newline);
   return Result::Ok;
 }
 

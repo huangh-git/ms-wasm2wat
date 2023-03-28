@@ -426,6 +426,19 @@ Result ExprVisitor::HandleDefaultState(Expr* expr) {
     case ExprType::Unreachable:
       CHECK_RESULT(delegate_->OnUnreachableExpr(cast<UnreachableExpr>(expr)));
       break;
+
+    case ExprType::MemrefConst:
+      CHECK_RESULT(delegate_->OnMemrefConstExpr(cast<MemrefConstExpr>(expr)));
+      break;
+    case ExprType::MemrefField:
+      CHECK_RESULT(delegate_->OnMemrefFieldExpr(cast<MemrefFieldExpr>(expr)));
+      break;
+    case ExprType::MemrefAlloc:
+      CHECK_RESULT(delegate_->OnMemrefAllocExpr(cast<MemrefAllocExpr>(expr)));
+      break ;
+    case ExprType::MemrefNarrow:
+      CHECK_RESULT(delegate_->OnMemrefNarrowExpr(cast<MemrefNarrowExpr>(expr)));
+      break ;
   }
 
   return Result::Ok;

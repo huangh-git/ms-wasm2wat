@@ -44,6 +44,7 @@ class Type {
     I16 = -0x07,        // 0x79  : packed-type only, used in gc and as v128 lane
     FuncRef = -0x10,    // 0x70
     ExternRef = -0x11,  // 0x6f
+    MemRef = -0x12,     // 0x6E 0110 1110 -> 1001 0001
     Reference = -0x15,  // 0x6b
     Func = -0x20,       // 0x60
     Struct = -0x21,     // 0x5f
@@ -80,6 +81,7 @@ class Type {
 
   std::string GetName() const {
     switch (enum_) {
+      case Type::MemRef:    return "memref";
       case Type::I32:       return "i32";
       case Type::I64:       return "i64";
       case Type::F32:       return "f32";
@@ -139,6 +141,7 @@ class Type {
       case Type::Void:
         return TypeVector();
 
+      case Type::MemRef:
       case Type::I32:
       case Type::I64:
       case Type::F32:
