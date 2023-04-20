@@ -1191,6 +1191,9 @@ Result BinaryReader::ReadInstructions(bool stop_on_end,
         CALLBACK0(OnOpcodeBare);
         break;
 
+      case Opcode::MemrefEQ:
+      case Opcode::MemrefNE:
+
       case Opcode::I32Eq:
       case Opcode::I32Ne:
       case Opcode::I32LtS:
@@ -1877,6 +1880,11 @@ Result BinaryReader::ReadInstructions(bool stop_on_end,
         Index field;
         CHECK_RESULT(ReadIndex(&field, "memref field index"));
         CALLBACK(OnMemrefFieldExpr, opcode, field);
+        break;
+
+      case Opcode::MemrefNull:
+        CALLBACK(OnMemrefNullExpr, opcode);
+        CALLBACK0(OnOpcodeBare);
         break;
 
       default:

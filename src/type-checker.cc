@@ -996,4 +996,9 @@ Result TypeChecker::OnMemrefField(Index index) {
   return result;
 }
 
+Result TypeChecker::OnMemrefNull() {
+  PushType(Type::MemRef);
+  return Result::Ok;
+}
+
 }  // namespace wabt

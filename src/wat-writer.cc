@@ -623,6 +623,7 @@ class WatWriter::ExprVisitorDelegate : public ExprVisitor::Delegate {
   Result OnMemrefAllocExpr(MemrefAllocExpr*) override;
   Result OnMemrefNarrowExpr(MemrefNarrowExpr*) override;
   Result OnMemrefFieldExpr(MemrefFieldExpr*) override;
+  Result OnMemrefNullExpr(MemrefNullExpr*) override;
 
  private:
   WatWriter* writer_;
@@ -1120,6 +1121,11 @@ Result WatWriter::ExprVisitorDelegate::OnMemrefFieldExpr(MemrefFieldExpr* expr) 
   writer_->Writef("%d", static_cast<int32_t>(expr->fieldIdx));
   writer_->WriteNewline(NO_FORCE_NEWLINE);
 //  writer_->WriteNameOrIndex("", expr->fieldIdx, NextChar::Newline);
+  return Result::Ok;
+}
+
+Result WatWriter::ExprVisitorDelegate::OnMemrefNullExpr(wabt::MemrefNullExpr* expr) {
+  writer_->WritePutsSpace(expr->opcode.GetName());
   return Result::Ok;
 }
 

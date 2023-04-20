@@ -182,6 +182,7 @@ class SharedValidator {
 
   Result OnMemrefCheck(const Location&, Opcode);
   Result OnMemrefField(const Location&, Index);
+  Result OnMemrefNull(const Location&, Opcode);
 
  private:
   struct FuncType {

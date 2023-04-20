@@ -439,6 +439,9 @@ Result ExprVisitor::HandleDefaultState(Expr* expr) {
     case ExprType::MemrefNarrow:
       CHECK_RESULT(delegate_->OnMemrefNarrowExpr(cast<MemrefNarrowExpr>(expr)));
       break ;
+    case ExprType::MemrefNull:
+      CHECK_RESULT(delegate_->OnMemrefNullExpr(cast<MemrefNullExpr>(expr)));
+      break;
   }
 
   return Result::Ok;

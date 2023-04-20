@@ -63,6 +63,7 @@ const char* ExprTypeName[] = {
     "MemrefConst",
     "MemrefField",
     "MemrefNarrow",
+    "MemrefNull",
     "Nop",
     "RefIsNull",
     "RefFunc",

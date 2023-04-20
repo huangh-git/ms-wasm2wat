@@ -160,6 +160,7 @@ class Validator : public ExprVisitor::Delegate {
   Result OnMemrefAllocExpr(MemrefAllocExpr*) override;
   Result OnMemrefNarrowExpr(MemrefNarrowExpr*) override;
   Result OnMemrefFieldExpr(MemrefFieldExpr*) override;
+  Result OnMemrefNullExpr(MemrefNullExpr*) override;
 
  private:
   Type GetDeclarationType(const FuncDeclaration&);
@@ -638,6 +639,11 @@ Result Validator::OnMemrefNarrowExpr(MemrefNarrowExpr* expr) {
 }
 Result Validator::OnMemrefFieldExpr(MemrefFieldExpr* expr) {
   result_ |= validator_.OnMemrefField(expr->loc, expr->fieldIdx);
+  return Result::Ok;
+}
+
+Result Validator::OnMemrefNullExpr(MemrefNullExpr* expr) {
+  result_ |= validator_.OnMemrefNull(expr->loc, expr->opcode);
   return Result::Ok;
 }
 

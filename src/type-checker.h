@@ -138,6 +138,7 @@ class TypeChecker {
 
   Result OnMemrefCheckOpcode3(Opcode opcode);
   Result OnMemrefField(Index index);
+  Result OnMemrefNull();
 
  private:
   void WABT_PRINTF_FORMAT(2, 3) PrintError(const char* fmt, ...);

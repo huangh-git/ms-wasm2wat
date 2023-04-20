@@ -1197,4 +1197,10 @@ Result SharedValidator::OnMemrefField(const Location& loc, Index idx) {
   return result;
 }
 
+Result SharedValidator::OnMemrefNull(const Location& loc, Opcode opcode) {
+  Result result = CheckInstr(opcode, loc);
+  result |= typechecker_.OnMemrefNull();
+  return result;
+}
+
 }  // namespace wabt

@@ -489,6 +489,7 @@ class BinaryReaderDelegate {
   virtual Result OnMemrefAllocExpr(Opcode opcode) = 0;
   virtual Result OnMemrefNarrowExpr(Opcode opcode) = 0;
   virtual Result OnMemrefFieldExpr(Opcode opcode, Index index) = 0;
+  virtual Result OnMemrefNullExpr(Opcode opcode) = 0;
 
   const State* state = nullptr;
 };

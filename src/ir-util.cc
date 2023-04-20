@@ -150,6 +150,7 @@ ModuleContext::Arities ModuleContext::GetExprArity(const Expr& expr) const {
               true};
     }
 
+    case ExprType::MemrefNull:
     case ExprType::MemrefConst:
     case ExprType::Const:
     case ExprType::GlobalGet:

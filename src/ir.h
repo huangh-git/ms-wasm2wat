@@ -344,6 +344,7 @@ enum class ExprType {
   MemrefConst,
   MemrefField,
   MemrefNarrow,
+  MemrefNull,
   Nop,
   RefIsNull,
   RefFunc,
@@ -502,6 +503,7 @@ class MemrefConstExpr : public ExprMixin<ExprType::MemrefConst> {
 };
 typedef OpcodeExpr<ExprType::MemrefAlloc> MemrefAllocExpr;
 typedef OpcodeExpr<ExprType::MemrefNarrow> MemrefNarrowExpr;
+typedef OpcodeExpr<ExprType::MemrefNull> MemrefNullExpr;
 
 class MemrefFieldExpr : public OpcodeExpr<ExprType::MemrefField> {
  public:
