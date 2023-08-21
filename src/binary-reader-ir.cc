@@ -352,6 +352,7 @@ class BinaryReaderIR : public BinaryReaderNop {
   Result OnMemrefNarrowExpr(Opcode opcode) override;
   Result OnMemrefFieldExpr(Opcode opcode, Index index) override;
   Result OnMemrefNullExpr(Opcode opcode) override;
+  Result OnSelectMExpr() override;
 
  private:
   Location GetLocation() const;
@@ -1699,6 +1700,11 @@ Result BinaryReaderIR::OnMemrefFieldExpr(wabt::Opcode opcode, wabt::Index index)
 Result BinaryReaderIR::OnMemrefNullExpr(wabt::Opcode opcode) {
   return AppendExpr(MakeUnique<MemrefNullExpr>(opcode));
 }
+
+Result BinaryReaderIR::OnSelectMExpr() {
+  return AppendExpr(MakeUnique<MemrefSelectExpr>());
+}
+
 
 }  // end anonymous namespace
 

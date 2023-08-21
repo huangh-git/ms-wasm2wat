@@ -293,6 +293,7 @@ class BinaryReaderDelegate {
   virtual Result OnReturnCallIndirectExpr(Index sig_index,
                                           Index table_index) = 0;
   virtual Result OnSelectExpr(Index result_count, Type* result_types) = 0;
+  virtual Result OnSelectMExpr() = 0;
   virtual Result OnStoreExpr(Opcode opcode,
                              Index memidx,
                              Address alignment_log2,

@@ -1001,4 +1001,10 @@ Result TypeChecker::OnMemrefNull() {
   return Result::Ok;
 }
 
+Result TypeChecker::OnSelectM() {
+  PopAndCheck3Types(Type::MemRef, Type::MemRef, Type::I32, "memref.select");
+  PushType(Type::MemRef);
+  return Result::Ok;
+}
+
 }  // namespace wabt

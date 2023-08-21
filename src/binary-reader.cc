@@ -756,6 +756,11 @@ Result BinaryReader::ReadInstructions(bool stop_on_end,
         CALLBACK(OnSelectExpr, 0, nullptr);
         CALLBACK0(OnOpcodeBare);
         break;
+      
+      case Opcode::SelectM:
+        CALLBACK(OnSelectMExpr);
+        CALLBACK0(OnOpcodeBare);
+        break;
 
       case Opcode::Br: {
         Index depth;

@@ -1203,4 +1203,10 @@ Result SharedValidator::OnMemrefNull(const Location& loc, Opcode opcode) {
   return result;
 }
 
+Result SharedValidator::OnSelectM(const Location& loc) {
+  Result result = CheckInstr(Opcode::SelectM, loc);
+  result |= typechecker_.OnSelectM();
+  return result;
+}
+
 }  // namespace wabt

@@ -219,6 +219,7 @@ ModuleContext::Arities ModuleContext::GetExprArity(const Expr& expr) const {
     case ExprType::AtomicRmwCmpxchg:
     case ExprType::AtomicWait:
     case ExprType::Select:
+    case ExprType::MemrefSelectM:
       return {3, 1};
 
     case ExprType::Throw: {

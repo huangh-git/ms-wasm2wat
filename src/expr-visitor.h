@@ -143,6 +143,7 @@ class ExprVisitor::Delegate {
   virtual Result OnMemrefNarrowExpr(MemrefNarrowExpr*) = 0;
   virtual Result OnMemrefFieldExpr(MemrefFieldExpr*) = 0;
   virtual Result OnMemrefNullExpr(MemrefNullExpr*) = 0;
+  virtual Result OnSelectMExpr(MemrefSelectExpr*) = 0;
 };
 
 class ExprVisitor::DelegateNop : public ExprVisitor::Delegate {
@@ -227,6 +228,7 @@ class ExprVisitor::DelegateNop : public ExprVisitor::Delegate {
   Result OnMemrefNarrowExpr(MemrefNarrowExpr*) override { return Result::Ok; }
   Result OnMemrefFieldExpr(MemrefFieldExpr*) override { return Result::Ok; }
   Result OnMemrefNullExpr(MemrefNullExpr*) override { return Result::Ok; }
+  Result OnSelectMExpr(MemrefSelectExpr*) override { return Result::Ok; }
 };
 
 }  // namespace wabt

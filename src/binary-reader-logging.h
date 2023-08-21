@@ -410,6 +410,7 @@ class BinaryReaderLogging : public BinaryReaderDelegate {
   Result OnMemrefNarrowExpr(Opcode opcode) override { return Result::Ok; }
   Result OnMemrefFieldExpr(Opcode opcode, Index index) override { return Result::Ok; }
   Result OnMemrefNullExpr(Opcode opcode) override { return Result::Ok; }
+  Result OnSelectMExpr() override { return Result::Ok; }
 
  private:
   void Indent();
