@@ -1126,12 +1126,12 @@ Result WatWriter::ExprVisitorDelegate::OnMemrefFieldExpr(MemrefFieldExpr* expr) 
 }
 
 Result WatWriter::ExprVisitorDelegate::OnMemrefNullExpr(wabt::MemrefNullExpr* expr) {
-  writer_->WritePutsSpace(expr->opcode.GetName());
+  writer_->WritePutsNewline(expr->opcode.GetName());
   return Result::Ok;
 }
 
 Result WatWriter::ExprVisitorDelegate::OnSelectMExpr(MemrefSelectExpr* expr) {
-  writer_->WritePutsSpace(Opcode::SelectM_Opcode.GetName());
+  writer_->WritePutsNewline(Opcode::SelectM_Opcode.GetName());
   return Result::Ok;
 }
 
