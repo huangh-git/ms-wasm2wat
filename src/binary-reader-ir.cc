@@ -349,7 +349,7 @@ class BinaryReaderIR : public BinaryReaderNop {
 
   Result OnMemrefConstExpr(uint32_t base_bits, uint32_t size_bits, uint32_t attr_bits) override;
   Result OnMemrefAllocExpr(Opcode opcode) override;
-  Result OnMemrefNarrowExpr(Opcode opcode) override;
+  Result OnMemrefNarrowExpr(uint32_t size) override;
   Result OnMemrefFieldExpr(Opcode opcode, Index index) override;
   Result OnMemrefNullExpr(Opcode opcode) override;
   Result OnSelectMExpr() override;
@@ -1688,8 +1688,8 @@ Result BinaryReaderIR::OnMemrefAllocExpr(wabt::Opcode opcode) {
   return AppendExpr(MakeUnique<MemrefAllocExpr>(opcode));
 }
 
-Result BinaryReaderIR::OnMemrefNarrowExpr(wabt::Opcode opcode) {
-  return AppendExpr(MakeUnique<MemrefNarrowExpr>(opcode));
+Result BinaryReaderIR::OnMemrefNarrowExpr(uint32_t size) {
+  return AppendExpr(MakeUnique<MemrefNarrowExpr>(size));
 }
 
 Result BinaryReaderIR::OnMemrefFieldExpr(wabt::Opcode opcode, wabt::Index index) {

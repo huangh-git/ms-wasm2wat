@@ -1102,8 +1102,8 @@ Result WatWriter::ExprVisitorDelegate::OnLoadZeroExpr(LoadZeroExpr* expr) {
 
 Result WatWriter::ExprVisitorDelegate::OnMemrefConstExpr(MemrefConstExpr* expr) {
   writer_->WritePutsSpace(Opcode::MemrefConst_Opcode.GetName());
-  writer_->Writef("base=%d", static_cast<int32_t>(expr->base));;
-  writer_->Writef("size=%d", static_cast<int32_t>(expr->size));;
+  writer_->Writef("base=%d", static_cast<int32_t>(expr->base));
+  writer_->Writef("size=%d", static_cast<int32_t>(expr->size));
   writer_->Writef("attr=%d", static_cast<int32_t>(expr->attr));
   writer_->WriteNewline(NO_FORCE_NEWLINE);
   return Result::Ok;
@@ -1114,7 +1114,9 @@ Result WatWriter::ExprVisitorDelegate::OnMemrefAllocExpr(MemrefAllocExpr* expr) 
   return Result::Ok;
 }
 Result WatWriter::ExprVisitorDelegate::OnMemrefNarrowExpr(MemrefNarrowExpr* expr) {
-  writer_->WritePutsNewline(expr->opcode.GetName());
+  writer_->WritePutsSpace(Opcode::MemrefNarrow_Opcode.GetName());
+  writer_->Writef("size=%d", static_cast<int32_t>(expr->size));
+  writer_->WriteNewline(NO_FORCE_NEWLINE);
   return Result::Ok;
 }
 Result WatWriter::ExprVisitorDelegate::OnMemrefFieldExpr(MemrefFieldExpr* expr) {

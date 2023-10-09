@@ -1191,6 +1191,12 @@ Result SharedValidator::OnMemrefCheck(const Location& loc, Opcode opcode) {
   return result;
 }
 
+Result SharedValidator::OnMemrefNarrow(const Location& loc, uint32_t size) {
+  Result result = CheckInstr(Opcode::MemrefNarrow, loc);
+  result |= typechecker_.OnMemrefNarrowCheck(size);
+  return result;
+}
+
 Result SharedValidator::OnMemrefField(const Location& loc, Index idx) {
   Result result = CheckInstr(Opcode::MemrefField, loc);
   result |= typechecker_.OnMemrefField(idx);

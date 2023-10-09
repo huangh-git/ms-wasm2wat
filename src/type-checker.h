@@ -137,6 +137,7 @@ class TypeChecker {
   static Result CheckType(Type actual, Type expected);
 
   Result OnMemrefCheckOpcode3(Opcode opcode);
+  Result OnMemrefNarrowCheck(uint32_t size);
   Result OnMemrefField(Index index);
   Result OnMemrefNull();
   Result OnSelectM();

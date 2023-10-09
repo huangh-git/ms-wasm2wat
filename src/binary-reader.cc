@@ -1862,13 +1862,13 @@ Result BinaryReader::ReadInstructions(bool stop_on_end,
         break;
 
       case Opcode::MemrefConst:
-        uint32_t base;
-        CHECK_RESULT(ReadU32Leb128(&base, "memref.base_const value"));
-        uint32_t size;
-        CHECK_RESULT(ReadU32Leb128(&size, "memref.size_const value"));
-        uint32_t attr;
-        CHECK_RESULT(ReadU32Leb128(&attr, "memref.attr_const value"));
-        CALLBACK(OnMemrefConstExpr, base, size, attr);
+        uint32_t mrefBase;
+        CHECK_RESULT(ReadU32Leb128(&mrefBase, "memref.base_const value"));
+        uint32_t mrefSize;
+        CHECK_RESULT(ReadU32Leb128(&mrefSize, "memref.size_const value"));
+        uint32_t mrefAttr;
+        CHECK_RESULT(ReadU32Leb128(&mrefAttr, "memref.attr_const value"));
+        CALLBACK(OnMemrefConstExpr, mrefBase, mrefSize, mrefAttr);
         break;
 
       case Opcode::MemrefAlloc:
@@ -1877,7 +1877,9 @@ Result BinaryReader::ReadInstructions(bool stop_on_end,
         break;
 
       case Opcode::MemrefNarrow:
-        CALLBACK(OnMemrefNarrowExpr, opcode);
+        uint32_t narrowSize;
+        CHECK_RESULT(ReadU32Leb128(&narrowSize, "memref narrow size"));
+        CALLBACK(OnMemrefNarrowExpr, narrowSize);
         CALLBACK0(OnOpcodeBare);
         break;
 

@@ -488,7 +488,7 @@ class BinaryReaderDelegate {
   /* Memref */
   virtual Result OnMemrefConstExpr(uint32_t base_bits, uint32_t size_bits, uint32_t attr_bits) = 0;
   virtual Result OnMemrefAllocExpr(Opcode opcode) = 0;
-  virtual Result OnMemrefNarrowExpr(Opcode opcode) = 0;
+  virtual Result OnMemrefNarrowExpr(uint32_t size) = 0;
   virtual Result OnMemrefFieldExpr(Opcode opcode, Index index) = 0;
   virtual Result OnMemrefNullExpr(Opcode opcode) = 0;
 

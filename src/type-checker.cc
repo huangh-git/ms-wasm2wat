@@ -988,6 +988,14 @@ Result TypeChecker::OnMemrefCheckOpcode3(Opcode opcode) {
   return CheckOpcode3(opcode);
 }
 
+Result TypeChecker::OnMemrefNarrowCheck(uint32_t size) {
+  if (size >= (1u<<24))return Result::Error;
+  Result result = Result::Ok;
+  result |= PopAndCheck2Types(Type::I32, Type::MemRef, "memref.narrow");
+  PushType(Type::MemRef);
+  return result;
+}
+
 Result TypeChecker::OnMemrefField(Index index) {
   if(index >= 4)return Result::Error;
   Result result = Result::Ok;

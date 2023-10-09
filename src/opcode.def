@@ -236,7 +236,7 @@ WABT_OPCODE(MemRef,  I32,     I32,  I32,  0,  0,    0xda, MemrefConst, "memref.c
 WABT_OPCODE(MemRef,  MemRef,  I32,  ___,  0,  0,    0xdb, MemrefAdd, "memref.add", "")
 WABT_OPCODE(MemRef,  MemRef,  I32,  ___,  0,  0,    0xdc, MemrefAnd, "memref.and", "")
 WABT_OPCODE(MemRef,  I32,     I32,  I32,  0,  0,    0xdd, MemrefAlloc, "memref.alloc", "")
-WABT_OPCODE(MemRef,  MemRef,  I32,  I32,  0,  0,    0xde, MemrefNarrow, "memref.narrow", "")
+WABT_OPCODE(MemRef,  I32,  MemRef,  ___,  0,  0,    0xde, MemrefNarrow, "memref.narrow", "")
 WABT_OPCODE(I32,     MemRef,  ___,  ___,  0,  0,    0xdf, MemrefField, "memref.field", "")
 
 WABT_OPCODE(I32,     MemRef,  ___,  ___,  4,  0,    0xe0, I32MSLoad, "i32.msload", "")
