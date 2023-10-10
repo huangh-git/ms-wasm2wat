@@ -1110,7 +1110,9 @@ Result WatWriter::ExprVisitorDelegate::OnMemrefConstExpr(MemrefConstExpr* expr) 
 }
 
 Result WatWriter::ExprVisitorDelegate::OnMemrefAllocExpr(MemrefAllocExpr* expr) {
-  writer_->WritePutsNewline(expr->opcode.GetName());
+  writer_->WritePutsSpace(Opcode::MemrefAlloc_Opcode.GetName());
+  writer_->Writef("attr=%#x", static_cast<int32_t>(expr->attr));
+  writer_->WriteNewline(NO_FORCE_NEWLINE);
   return Result::Ok;
 }
 Result WatWriter::ExprVisitorDelegate::OnMemrefNarrowExpr(MemrefNarrowExpr* expr) {

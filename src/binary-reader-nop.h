@@ -584,7 +584,7 @@ class BinaryReaderNop : public BinaryReaderDelegate {
   Result EndLinkingSection() override { return Result::Ok; }
 
   Result OnMemrefConstExpr(uint32_t base_bits, uint32_t size_bits, uint32_t attr_bits) override { return Result::Ok; }
-  Result OnMemrefAllocExpr(Opcode opcode) override { return Result::Ok; }
+  Result OnMemrefAllocExpr(uint32_t attr) override { return Result::Ok; }
   Result OnMemrefNarrowExpr(uint32_t size) override { return Result::Ok; }
   Result OnMemrefFieldExpr(Opcode opcode, Index index) override { return Result::Ok; }
   Result OnMemrefNullExpr(Opcode opcode) override { return Result::Ok; }

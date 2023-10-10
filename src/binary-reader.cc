@@ -1872,7 +1872,9 @@ Result BinaryReader::ReadInstructions(bool stop_on_end,
         break;
 
       case Opcode::MemrefAlloc:
-        CALLBACK(OnMemrefAllocExpr, opcode);
+        uint32_t attr;
+        CHECK_RESULT(ReadU32Leb128(&attr, "memref alloc attr"));
+        CALLBACK(OnMemrefAllocExpr, attr);
         CALLBACK0(OnOpcodeBare);
         break;
 

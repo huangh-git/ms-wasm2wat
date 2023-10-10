@@ -1185,9 +1185,9 @@ Result SharedValidator::OnUnreachable(const Location& loc) {
   return result;
 }
 
-Result SharedValidator::OnMemrefCheck(const Location& loc, Opcode opcode) {
-  Result result = CheckInstr(opcode, loc);
-  result |= typechecker_.OnMemrefCheckOpcode3(opcode);
+Result SharedValidator::OnMemrefAllocCheck(const Location& loc, uint32_t attr) {
+  Result result = CheckInstr(Opcode::MemrefAlloc, loc);
+  result |= typechecker_.OnMemrefAllocTypeCheck(attr);
   return result;
 }
 

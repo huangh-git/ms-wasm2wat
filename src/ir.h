@@ -502,10 +502,17 @@ class MemrefConstExpr : public ExprMixin<ExprType::MemrefConst> {
   uint32_t size;
   uint32_t attr;
 };
-typedef OpcodeExpr<ExprType::MemrefAlloc> MemrefAllocExpr;
+// typedef OpcodeExpr<ExprType::MemrefAlloc> MemrefAllocExpr;
 // typedef OpcodeExpr<ExprType::MemrefNarrow> MemrefNarrowExpr;
 typedef OpcodeExpr<ExprType::MemrefNull> MemrefNullExpr;
 typedef ExprMixin<ExprType::MemrefSelectM> MemrefSelectExpr;
+
+class MemrefAllocExpr : public ExprMixin<ExprType::MemrefAlloc> {
+ public:
+  MemrefAllocExpr(uint32_t attr, const Location& loc = Location())
+    : ExprMixin<ExprType::MemrefAlloc>(loc), attr(attr) {}
+  uint32_t attr;
+};
 
 class MemrefNarrowExpr : public ExprMixin<ExprType::MemrefNarrow> {
  public:

@@ -631,7 +631,7 @@ Result Validator::OnMemrefConstExpr(MemrefConstExpr* expr) {
   return Result::Ok;
 }
 Result Validator::OnMemrefAllocExpr(MemrefAllocExpr* expr) {
-  result_ |= validator_.OnMemrefCheck(expr->loc, expr->opcode);
+  result_ |= validator_.OnMemrefAllocCheck(expr->loc, expr->attr);
   return Result::Ok;
 }
 Result Validator::OnMemrefNarrowExpr(MemrefNarrowExpr* expr) {

@@ -984,8 +984,12 @@ Result TypeChecker::EndInitExpr() {
   return result;
 }
 
-Result TypeChecker::OnMemrefCheckOpcode3(Opcode opcode) {
-  return CheckOpcode3(opcode);
+Result TypeChecker::OnMemrefAllocTypeCheck(uint32_t attr) {
+  if (attr & (~(0x33)))return Result::Error; // only 00xx 00xx is used
+  Result result = Result::Ok;
+  result |= PopAndCheck2Types(Type::I32, Type::I32, "memref.alloc");
+  PushType(Type::MemRef);
+  return result;
 }
 
 Result TypeChecker::OnMemrefNarrowCheck(uint32_t size) {

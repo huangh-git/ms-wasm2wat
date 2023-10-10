@@ -180,7 +180,7 @@ class SharedValidator {
   Result OnUnary(const Location&, Opcode);
   Result OnUnreachable(const Location&);
 
-  Result OnMemrefCheck(const Location&, Opcode);
+  Result OnMemrefAllocCheck(const Location&, uint32_t);
   Result OnMemrefNarrow(const Location&, uint32_t);
   Result OnMemrefField(const Location&, Index);
   Result OnMemrefNull(const Location&, Opcode);
