@@ -8,3 +8,4 @@
 .vscode/
 /cmake-build-debug/
 mybuild/*
+.*

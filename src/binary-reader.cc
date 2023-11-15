@@ -426,6 +426,7 @@ Result BinaryReader::ReadOffset(Offset* offset, const char* desc) {
 Result BinaryReader::ReadAlignment(Address* alignment_log2, const char* desc) {
   uint32_t value;
   CHECK_RESULT(ReadU32Leb128(&value, desc));
+  value &= ~0x0700;
   if (value >= 128 ||
       (value >= 32 && !options_.features.multi_memory_enabled())) {
     PrintError("invalid %s: %u", desc, value);
