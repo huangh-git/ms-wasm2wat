@@ -225,25 +225,26 @@ WABT_OPCODE(I64,  I64,  ___,  ___,  0,  0,    0xC2, I64Extend8S, "i64.extend8_s"
 WABT_OPCODE(I64,  I64,  ___,  ___,  0,  0,    0xC3, I64Extend16S, "i64.extend16_s", "")
 WABT_OPCODE(I64,  I64,  ___,  ___,  0,  0,    0xC4, I64Extend32S, "i64.extend32_s", "")
 
-WABT_OPCODE(I32,    MemRef, MemRef, ___, 0, 0, 0xc5, MemrefEQ,   "memref.eq",   "")
-WABT_OPCODE(I32,    MemRef, MemRef, ___, 0, 0, 0xc6, MemrefNE,   "memref.ne",   "")
-WABT_OPCODE(MemRef, ___,    ___,    ___, 0, 0, 0xc7, MemrefNull, "memref.null", "")
-
 /* MemRef */
-WABT_OPCODE(___,  ___,  ___,  I32,  0,  0,    0xc8, SelectM, "mref.select", "")
+WABT_OPCODE(I32,    MemRef, MemRef, ___, 0, 0, 0xc5, MemrefEQ,   "mref.eq",   "")
+WABT_OPCODE(I32,    MemRef, MemRef, ___, 0, 0, 0xc6, MemrefNE,   "mref.ne",   "")
+WABT_OPCODE(MemRef, ___,    ___,    ___, 0, 0, 0xc7, MemrefNull, "mref.null", "")
 
-WABT_OPCODE(MemRef,  I32,     I32,  I32,  0,  0,    0xda, MemrefConst, "memref.const", "")
-WABT_OPCODE(MemRef,  MemRef,  I32,  ___,  0,  0,    0xdb, MemrefAdd, "memref.add", "")
-WABT_OPCODE(MemRef,  MemRef,  I32,  ___,  0,  0,    0xdc, MemrefAnd, "memref.and", "")
-WABT_OPCODE(MemRef,  I32,     I32,  I32,  0,  0,    0xdd, MemrefAlloc, "memref.alloc", "")
-WABT_OPCODE(MemRef,  I32,  MemRef,  ___,  0,  0,    0xde, MemrefNarrow, "memref.narrow", "")
-WABT_OPCODE(I32,     MemRef,  ___,  ___,  0,  0,    0xdf, MemrefField, "memref.field", "")
+WABT_OPCODE(___,  ___,  ___,  I32,  0,  0,    0xc8, SelectM, "mref.select", "")
+WABT_OPCODE(___,  MemRef,  ___,  ___,  0,  0, 0xc9, MemrefDealloc, "mref.dealloc", "")
+
+WABT_OPCODE(MemRef,  I32,     I32,  I32,  0,  0,    0xda, MemrefConst, "mref.const", "")
+WABT_OPCODE(MemRef,  MemRef,  I32,  ___,  0,  0,    0xdb, MemrefAdd, "mref.add", "")
+WABT_OPCODE(MemRef,  MemRef,  I32,  ___,  0,  0,    0xdc, MemrefAnd, "mref.and", "")
+WABT_OPCODE(MemRef,  I32,     I32,  I32,  0,  0,    0xdd, MemrefAlloc, "mref.alloc", "")
+WABT_OPCODE(MemRef,  I32,  MemRef,  ___,  0,  0,    0xde, MemrefNarrow, "mref.narrow", "")
+WABT_OPCODE(I32,     MemRef,  ___,  ___,  0,  0,    0xdf, MemrefField, "mref.field", "")
 
 WABT_OPCODE(I32,     MemRef,  ___,  ___,  4,  0,    0xe0, I32MSLoad, "i32.msload", "")
 WABT_OPCODE(I64,     MemRef,  ___,  ___,  8,  0,    0xe1, I64MSLoad, "i64.msload", "")
 WABT_OPCODE(F32,     MemRef,  ___,  ___,  4,  0,    0xe2, F32MSLoad, "f32.msload", "")
 WABT_OPCODE(F64,     MemRef,  ___,  ___,  8,  0,    0xe3, F64MSLoad, "f64.msload", "")
-WABT_OPCODE(MemRef,  MemRef,  ___,  ___,  4,  0,    0xe4, MemrefMSLoad, "memref.msload", "")
+WABT_OPCODE(MemRef,  MemRef,  ___,  ___,  4,  0,    0xe4, MemrefMSLoad, "mref.msload", "")
 
 WABT_OPCODE(I32,  MemRef,  ___,  ___,  1,  0,    0xe5, I32MSLoad8S, "i32.msload8_s", "")
 WABT_OPCODE(I32,  MemRef,  ___,  ___,  1,  0,    0xe6, I32MSLoad8U, "i32.msload8_u", "")
@@ -260,7 +261,7 @@ WABT_OPCODE(___,  MemRef,  I32,     ___,  4,  0,    0xf0, I32MSStore, "i32.mssto
 WABT_OPCODE(___,  MemRef,  I64,     ___,  8,  0,    0xf1, I64MSStore, "i64.msstore", "")
 WABT_OPCODE(___,  MemRef,  F32,     ___,  4,  0,    0xf2, F32MSStore, "f32.msstore", "")
 WABT_OPCODE(___,  MemRef,  F64,     ___,  8,  0,    0xf3, F64MSStore, "f64.msstore", "")
-WABT_OPCODE(___,  MemRef,  MemRef,  ___,  4,  0,    0xf4, MemrefMSStore, "memref.msstore", "")
+WABT_OPCODE(___,  MemRef,  MemRef,  ___,  4,  0,    0xf4, MemrefMSStore, "mref.msstore", "")
 
 WABT_OPCODE(___,  MemRef,  I32,  ___,  1,  0,    0xf5, I32MSStore8, "i32.msstore8", "")
 WABT_OPCODE(___,  MemRef,  I32,  ___,  2,  0,    0xf6, I32MSStore16, "i32.msstore16", "")
@@ -269,7 +270,7 @@ WABT_OPCODE(___,  MemRef,  I64,  ___,  2,  0,    0xf8, I64MSStore16, "i64.msstor
 WABT_OPCODE(___,  MemRef,  I64,  ___,  4,  0,    0xf9, I64MSStore32, "i64.msstore32", "")
 
 /* Interpreter-only opcodes */
-// for memref，we should change the binary format for opcode
+// for mref，we should change the binary format for opcode
 WABT_OPCODE(___,  ___,  ___,  ___,  0,  0xf0,    0xe0, InterpAlloca, "alloca", "")
 WABT_OPCODE(___,  I32,  ___,  ___,  0,  0xf0,    0xe1, InterpBrUnless, "br_unless", "")
 WABT_OPCODE(___,  ___,  ___,  ___,  0,  0xf0,    0xe2, InterpCallImport, "call_import", "")

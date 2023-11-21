@@ -341,6 +341,7 @@ enum class ExprType {
   MemoryInit,
   MemorySize,
   MemrefAlloc,
+  MemrefDealloc,
   MemrefConst,
   MemrefField,
   MemrefNarrow,
@@ -506,7 +507,7 @@ class MemrefConstExpr : public ExprMixin<ExprType::MemrefConst> {
 // typedef OpcodeExpr<ExprType::MemrefNarrow> MemrefNarrowExpr;
 typedef OpcodeExpr<ExprType::MemrefNull> MemrefNullExpr;
 typedef ExprMixin<ExprType::MemrefSelectM> MemrefSelectExpr;
-
+typedef ExprMixin<ExprType::MemrefDealloc> MemrefDeallocExpr;
 class MemrefAllocExpr : public ExprMixin<ExprType::MemrefAlloc> {
  public:
   MemrefAllocExpr(uint32_t attr, const Location& loc = Location())

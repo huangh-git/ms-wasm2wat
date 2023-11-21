@@ -195,6 +195,7 @@ ModuleContext::Arities ModuleContext::GetExprArity(const Expr& expr) const {
     case ExprType::Drop:
     case ExprType::GlobalSet:
     case ExprType::LocalSet:
+    case ExprType::MemrefDealloc:
       return {1, 0};
 
     case ExprType::If:

@@ -158,6 +158,7 @@ class Validator : public ExprVisitor::Delegate {
 
   Result OnMemrefConstExpr(MemrefConstExpr*) override;
   Result OnMemrefAllocExpr(MemrefAllocExpr*) override;
+  Result OnMemrefDeallocExpr(MemrefDeallocExpr*) override;
   Result OnMemrefNarrowExpr(MemrefNarrowExpr*) override;
   Result OnMemrefFieldExpr(MemrefFieldExpr*) override;
   Result OnMemrefNullExpr(MemrefNullExpr*) override;
@@ -632,6 +633,10 @@ Result Validator::OnMemrefConstExpr(MemrefConstExpr* expr) {
 }
 Result Validator::OnMemrefAllocExpr(MemrefAllocExpr* expr) {
   result_ |= validator_.OnMemrefAllocCheck(expr->loc, expr->attr);
+  return Result::Ok;
+}
+Result Validator::OnMemrefDeallocExpr(MemrefDeallocExpr* expr) {
+  result_ |= validator_.OnMemrefDeallocCheck(expr->loc);
   return Result::Ok;
 }
 Result Validator::OnMemrefNarrowExpr(MemrefNarrowExpr* expr) {

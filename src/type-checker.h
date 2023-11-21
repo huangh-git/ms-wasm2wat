@@ -23,6 +23,7 @@
 #include "src/common.h"
 #include "src/feature.h"
 #include "src/opcode.h"
+#include "src/result.h"
 
 namespace wabt {
 
@@ -137,6 +138,7 @@ class TypeChecker {
   static Result CheckType(Type actual, Type expected);
 
   Result OnMemrefAllocTypeCheck(uint32_t attr);
+  Result OnMemrefDeallocTypeCheck();
   Result OnMemrefNarrowCheck(uint32_t size);
   Result OnMemrefField(Index index);
   Result OnMemrefNull();

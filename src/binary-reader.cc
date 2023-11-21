@@ -29,6 +29,8 @@
 #include "src/binary-reader-logging.h"
 #include "src/binary.h"
 #include "src/leb128.h"
+#include "src/opcode.h"
+#include "src/result.h"
 #include "src/stream.h"
 #include "src/utf8.h"
 
@@ -1876,6 +1878,10 @@ Result BinaryReader::ReadInstructions(bool stop_on_end,
         uint32_t attr;
         CHECK_RESULT(ReadU32Leb128(&attr, "memref alloc attr"));
         CALLBACK(OnMemrefAllocExpr, attr);
+        CALLBACK0(OnOpcodeBare);
+        break;
+      case Opcode::MemrefDealloc:
+        CALLBACK(OnMemrefDeallocExpr);
         CALLBACK0(OnOpcodeBare);
         break;
 

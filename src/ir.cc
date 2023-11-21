@@ -60,6 +60,7 @@ const char* ExprTypeName[] = {
     "MemoryInit",
     "MemorySize",
     "MemrefAlloc",
+    "MemrefDealloc",
     "MemrefConst",
     "MemrefField",
     "MemrefNarrow",

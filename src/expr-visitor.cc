@@ -18,6 +18,7 @@
 
 #include "src/cast.h"
 #include "src/ir.h"
+#include "src/result.h"
 
 namespace wabt {
 
@@ -436,6 +437,9 @@ Result ExprVisitor::HandleDefaultState(Expr* expr) {
     case ExprType::MemrefAlloc:
       CHECK_RESULT(delegate_->OnMemrefAllocExpr(cast<MemrefAllocExpr>(expr)));
       break ;
+    case ExprType::MemrefDealloc:
+      CHECK_RESULT(delegate_->OnMemrefDeallocExpr(cast<MemrefDeallocExpr>(expr)));
+      break;
     case ExprType::MemrefNarrow:
       CHECK_RESULT(delegate_->OnMemrefNarrowExpr(cast<MemrefNarrowExpr>(expr)));
       break ;

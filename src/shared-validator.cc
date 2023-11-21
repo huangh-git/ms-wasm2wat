@@ -19,6 +19,7 @@
 #include <algorithm>
 #include <cinttypes>
 #include <limits>
+#include "src/result.h"
 
 namespace wabt {
 
@@ -1188,6 +1189,12 @@ Result SharedValidator::OnUnreachable(const Location& loc) {
 Result SharedValidator::OnMemrefAllocCheck(const Location& loc, uint32_t attr) {
   Result result = CheckInstr(Opcode::MemrefAlloc, loc);
   result |= typechecker_.OnMemrefAllocTypeCheck(attr);
+  return result;
+}
+
+Result SharedValidator::OnMemrefDeallocCheck(const Location& loc) {
+  Result result = CheckInstr(Opcode::MemrefDealloc, loc);
+  result |= typechecker_.OnMemrefDeallocTypeCheck();
   return result;
 }
 

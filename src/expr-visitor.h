@@ -140,6 +140,7 @@ class ExprVisitor::Delegate {
 
   virtual Result OnMemrefConstExpr(MemrefConstExpr*) = 0;
   virtual Result OnMemrefAllocExpr(MemrefAllocExpr*) = 0;
+  virtual Result OnMemrefDeallocExpr(MemrefDeallocExpr*) = 0;
   virtual Result OnMemrefNarrowExpr(MemrefNarrowExpr*) = 0;
   virtual Result OnMemrefFieldExpr(MemrefFieldExpr*) = 0;
   virtual Result OnMemrefNullExpr(MemrefNullExpr*) = 0;
@@ -225,6 +226,7 @@ class ExprVisitor::DelegateNop : public ExprVisitor::Delegate {
 
   Result OnMemrefConstExpr(MemrefConstExpr*) override { return Result::Ok; }
   Result OnMemrefAllocExpr(MemrefAllocExpr*) override { return Result::Ok; }
+  Result OnMemrefDeallocExpr(MemrefDeallocExpr*) override { return Result::Ok; }
   Result OnMemrefNarrowExpr(MemrefNarrowExpr*) override { return Result::Ok; }
   Result OnMemrefFieldExpr(MemrefFieldExpr*) override { return Result::Ok; }
   Result OnMemrefNullExpr(MemrefNullExpr*) override { return Result::Ok; }

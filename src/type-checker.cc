@@ -992,6 +992,12 @@ Result TypeChecker::OnMemrefAllocTypeCheck(uint32_t attr) {
   return result;
 }
 
+Result TypeChecker::OnMemrefDeallocTypeCheck() {
+  Result result = Result::Ok;
+  result |= PopAndCheck1Type(Type::MemRef, "memref.dealloc");
+  return result;
+}
+
 Result TypeChecker::OnMemrefNarrowCheck(uint32_t size) {
   if (size >= (1u<<24))return Result::Error;
   Result result = Result::Ok;
