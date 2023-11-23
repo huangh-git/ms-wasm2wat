@@ -81,7 +81,7 @@ class Type {
 
   std::string GetName() const {
     switch (enum_) {
-      case Type::MemRef:    return "memref";
+      case Type::MemRef:    return "mref";
       case Type::I32:       return "i32";
       case Type::I64:       return "i64";
       case Type::F32:       return "f32";
