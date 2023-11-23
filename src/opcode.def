@@ -231,7 +231,7 @@ WABT_OPCODE(I32,    MemRef, MemRef, ___, 0, 0, 0xc6, MemrefNE,   "mref.ne",   ""
 WABT_OPCODE(MemRef, ___,    ___,    ___, 0, 0, 0xc7, MemrefNull, "mref.null", "")
 
 WABT_OPCODE(___,  ___,  ___,  I32,  0,  0,    0xc8, SelectM, "mref.select", "")
-WABT_OPCODE(___,  MemRef,  ___,  ___,  0,  0, 0xc9, MemrefDealloc, "mref.dealloc", "")
+WABT_OPCODE(___,  I32,  MemRef,  ___,  0,  0, 0xc9, MemrefDealloc, "mref.dealloc", "")
 
 WABT_OPCODE(MemRef,  I32,     I32,  I32,  0,  0,    0xda, MemrefConst, "mref.const", "")
 WABT_OPCODE(MemRef,  MemRef,  I32,  ___,  0,  0,    0xdb, MemrefAdd, "mref.add", "")

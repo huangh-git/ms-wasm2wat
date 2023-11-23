@@ -1881,7 +1881,9 @@ Result BinaryReader::ReadInstructions(bool stop_on_end,
         CALLBACK0(OnOpcodeBare);
         break;
       case Opcode::MemrefDealloc:
-        CALLBACK(OnMemrefDeallocExpr);
+        uint32_t info;
+        CHECK_RESULT(ReadU32Leb128(&info, "memref dealloc attr"));
+        CALLBACK(OnMemrefDeallocExpr, info);
         CALLBACK0(OnOpcodeBare);
         break;
 

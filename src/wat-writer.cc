@@ -1118,6 +1118,7 @@ Result WatWriter::ExprVisitorDelegate::OnMemrefAllocExpr(MemrefAllocExpr* expr) 
 }
 Result WatWriter::ExprVisitorDelegate::OnMemrefDeallocExpr(MemrefDeallocExpr* expr) {
   writer_->WritePutsSpace(Opcode::MemrefDealloc_Opcode.GetName());
+  writer_->Writef("info=%#x", static_cast<int32_t>(expr->info));
   writer_->WriteNewline(NO_FORCE_NEWLINE);
   return Result::Ok;
 }
