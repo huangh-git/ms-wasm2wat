@@ -999,7 +999,7 @@ Result TypeChecker::OnMemrefDeallocTypeCheck() {
 }
 
 Result TypeChecker::OnMemrefNarrowCheck(uint32_t size) {
-  if ((size&0x80000000) >= (1u<<24))return Result::Error;
+  if ((size&0xf7ffffff) >= (1u<<24))return Result::Error;
   Result result = Result::Ok;
   result |= PopAndCheck2Types(Type::I32, Type::MemRef, "memref.narrow");
   PushType(Type::MemRef);
